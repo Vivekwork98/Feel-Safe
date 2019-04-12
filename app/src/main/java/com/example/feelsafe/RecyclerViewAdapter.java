@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "abcd";
 
     private ArrayList<String> Names ;
     private ArrayList<String> Numbers;
