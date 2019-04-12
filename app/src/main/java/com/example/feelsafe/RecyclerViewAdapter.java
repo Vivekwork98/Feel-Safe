@@ -44,7 +44,7 @@ class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.View
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + Names.get(position));
-
+                Log.d("abcd", here);
                 Toast.makeText(mContext, Names.get(position), Toast.LENGTH_SHORT).show();
 
             }
