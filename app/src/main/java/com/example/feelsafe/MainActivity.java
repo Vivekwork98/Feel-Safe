@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 DatabaseHelper myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDb = new DatabaseHelper(this);

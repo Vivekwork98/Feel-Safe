@@ -30,6 +30,8 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         myDb = new DatabaseHelper(this);
 
+        refreshList();
+
         button =  findViewById(R.id.btnAddContacts);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,30 +78,12 @@ public class Main2Activity extends AppCompatActivity {
 
                             myDb.insertData(name, cur_num);
 
-                            numbers.clear();
-                            names.clear();
-                            Cursor res = myDb.getAllData();
-                            while(res.moveToNext()) {
-//                                numbers.clear();
-//                                names.clear();
-                                int index;
-
-                                index = res.getColumnIndexOrThrow("NAME");
-                                String cname = res.getString(index);
-
-                                index = res.getColumnIndexOrThrow("NUMBER");
-                                String cnumber = res.getString(index);
-
-                                numbers.add(cname);
-                                names.add(cnumber);
-                            }
+                            refreshList();
 
                             //Log.d("abcd", res.toString());
                             //adapter.onBindViewHolder(this);
                             //----------------------------------------------------------------------------------
-                        }
-                        catch (Exception st)
-                        {
+                        } catch (Exception st) {
                             st.getMessage();
                             Log.d("abc", "catvh");
                         }
@@ -109,6 +93,30 @@ public class Main2Activity extends AppCompatActivity {
         }
         initRecyclerView();
     }
+
+    public void refreshList() {
+        numbers.clear();
+        names.clear();
+        Cursor res = myDb.getAllData();
+        while (res.moveToNext()) {
+//                                numbers.clear();
+//                                names.clear();
+            int index;
+
+            index = res.getColumnIndexOrThrow("NAME");
+            String cname = res.getString(index);
+
+            index = res.getColumnIndexOrThrow("NUMBER");
+            String cnumber = res.getString(index);
+
+            numbers.add(cname);
+            names.add(cnumber);
+        }
+
+        initRecyclerView();
+
+    }
+
 
     private void initRecyclerView(){
             Log.d("abc", "initRecyclerView: init recyclerview.");

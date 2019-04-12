@@ -19,17 +19,20 @@ class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.View
     private ArrayList<String> Names ;
     private ArrayList<String> Numbers;
     private Context mContext;
+    DatabaseHelper myDb;
 
     public RecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> numbers ) {
         Names = names;
         Numbers = numbers;
         mContext = context;
+        myDb = new DatabaseHelper(context);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
         return holder;
     }
 
@@ -40,13 +43,16 @@ class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.View
         holder.name.setText(Names.get(position));
         holder.number.setText(Numbers.get(position));
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.parentLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + Names.get(position));
-                Log.d("abcd", here);
+                Log.d("abcd", "here");
+
+                Integer a = myDb.deleteData(Names.get(position));
                 Toast.makeText(mContext, Names.get(position), Toast.LENGTH_SHORT).show();
 
+                return true;
             }
         });
     }
@@ -68,6 +74,7 @@ class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.View
             number = itemView.findViewById(R.id.tvNumber);
             name = itemView.findViewById(R.id.tvName);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+
         }
     }
 }
